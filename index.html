@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Electron Bowl!</title>
+  <style>
+    @font-face {
+      font-family: 'FreedomFont';
+      src: url('./assets/fonts/FREEDOM.ttf') format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'TrenchFont';
+      src: url('./assets/fonts/trench100free.ttf') format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-family: 'TrenchFont', Helvetica, sans-serif;
+    }
+
+    body {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .flex-thirty-item {
+        flex: 30%;
+    }
+
+    #top-bar {
+      display: flex;
+      height: 100px;
+      justify-content: center;
+      align-content: center;
+    }
+
+    #field-container {
+      flex: 100%;
+      height: 350px;
+      background-image: url("./assets/field.png");
+      background-repeat: no-repeat;
+    }
+
+    /* Sprites */
+    #player-sprite {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="top-bar" style="background-color:#495679;">
+    <div class="flex-thirty-item">
+      <h1>Time: 74</h1>
+    </div>
+    <div class="flex-thirty-item">
+      <h1>Score: 7</h1>
+    </div>
+    <div class="flex-thirty-item">
+      <h1>1st and 10</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div id="field-container">
+      <img id="player-sprite" src="./assets/player.gif" style="left: 290px; bottom: 175px">
+    </div>
+  </div>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./js/renderer.js')
+    require('./js/player_controller.js')
+
+  </script>
+</body>
+
+</html>
