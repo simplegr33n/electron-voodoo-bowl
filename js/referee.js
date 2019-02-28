@@ -4,7 +4,6 @@ module.exports = class Referee {
       this.yPos = yPos;
       this.name = "Referee";
       this.sprite = "./assets/referee.png";
-      this.whistleSound = this.whistleSound();
     }
   
     whistleSound() {

@@ -4,7 +4,6 @@ module.exports = class Zombie {
     this.yPos = yPos
     this.name = "Zombie"
     this.sprite = "./assets/zombie.png"
-    this.tackleSound = this.tackleSound()
   }
 
   moveUp() {

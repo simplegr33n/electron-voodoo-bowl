@@ -8,8 +8,8 @@ const Referee = require('./referee.js');
 
 
 const zombieOne = new Zombie(10, 10);
-zombieOne.tackeSound;
+zombieOne.tackleSound();
 
 const refereeOne = new Referee(11, 11);
-refereeOne.whistleSound;
+refereeOne.whistleSound();
 
