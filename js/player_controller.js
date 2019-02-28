@@ -34,97 +34,58 @@ function resetPlayer() {
 
 function movePlayer(e) {
     if (isStarted) {
-        // Face player right way
-        if ((e.keyCode == 37 || e.keyCode == 65) && playerForward) {
-            playerForward = false
-            player.style.transform = "scale(-1, 1)"
+        var keyCode = e.keyCode
+        isPaused = false
+
+        // Up or W
+        if ((keyCode == 38) || (keyCode == 87)) {
+            if (playerYPos <= 31) {
+                playerYPos++
+                player.style.bottom = yPositions[playerYPos] + "px"
+            }
         }
-        if ((e.keyCode == 39 || e.keyCode == 68) && !playerForward) {
-            playerForward = true
-            player.style.transform = "scale(1, 1)"
+
+        // Down or S
+        if ((keyCode == 40) || (keyCode == 83)) {
+            if (playerYPos >= 1) {
+                playerYPos--
+                player.style.bottom = yPositions[playerYPos] + "px"
+            }
         }
 
+        // Left or A
+        if (e.keyCode == 37 || e.keyCode == 65) {
+            // Face player right way
+            if (playerForward) {
+                playerForward = false
+                player.style.transform = "scale(-1, 1)"
+            }
+            if (playerXPos >= 1) {
+                playerXPos--
+                player.style.left = xPositions[playerXPos] + "px"
+            }
 
-        switch (e.keyCode) {
-            // UP
-            case (38):
-                if (playerYPos <= 31) {
-                    isPaused = false
-                    playerYPos++
-                    player.style.bottom = yPositions[playerYPos] + "px"
-                }
-                break;
-            case (87):
-                if (playerYPos <= 31) {
-                    isPaused = false
-                    playerYPos++
-                    player.style.bottom = yPositions[playerYPos] + "px"
-                }
-                break;
-
-            // DOWN
-            case (40):
-                if (playerYPos >= 1) {
-                    isPaused = false
-                    playerYPos--
-                    player.style.bottom = yPositions[playerYPos] + "px"
-                }
-                break;
-            case (83):
-                if (playerYPos >= 1) {
-                    isPaused = false
-                    playerYPos--
-                    player.style.bottom = yPositions[playerYPos] + "px"
-                }
-                break;
-
-            // LEFT
-            case (37):
-                if (playerXPos >= 1) {
-                    isPaused = false
-                    playerXPos--
-                    player.style.left = xPositions[playerXPos] + "px"
-                }
-                break;
-            case (65):
-                if (playerXPos >= 1) {
-                    isPaused = false
-                    playerXPos--
-                    player.style.left = xPositions[playerXPos] + "px"
-                }
-                break;
-
-            // RIGHT
-            case (39):
-                if (playerXPos <= 46) {
-                    isPaused = false
-                    playerXPos++
-                    player.style.left = xPositions[playerXPos] + "px"
-                    if (playerXPos == 47) {
-                        isPaused = true
-                        playerScore += 7
-                        document.getElementById('score-text').innerHTML = playerScore
-                        resetPlayer()
-                    }
-                }
-                break;
-            case (68):
-                if (playerXPos <= 46) {
-                    isPaused = false
-                    playerXPos++
-                    player.style.left = xPositions[playerXPos] + "px"
-                    if (playerXPos == 47) {
-                        isPaused = true
-                        playerScore += 7
-                        document.getElementById('score-text').innerHTML = playerScore
-                        resetPlayer()
-                    }
-                }
-                break;
-
-            default:
-            // code block
         }
+
+        // Right or D
+        if (e.keyCode == 39 || e.keyCode == 68) {
+            // Face player right way
+            if (!playerForward) {
+                playerForward = true
+                player.style.transform = "scale(1, 1)"
+            }
+            if (playerXPos <= 44) {
+                playerXPos++
+                player.style.left = xPositions[playerXPos] + "px"
+                if (playerXPos == 45) {
+                    isPaused = true
+                    playerScore += 7
+                    document.getElementById('score-text').innerHTML = playerScore
+                    resetPlayer()
+                }
+            }
+        }
+
     }
 }
 
