@@ -2,119 +2,9 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <title>Electron Bowl!</title>
-  <style>
-    @font-face {
-      font-family: 'FreedomFont';
-      src: url('./assets/fonts/FREEDOM.ttf') format('truetype');
-      font-style: normal;
-      font-weight: normal;
-    }
-
-    @font-face {
-      font-family: 'TrenchFont';
-      src: url('./assets/fonts/trench100free.ttf') format('truetype');
-      font-style: normal;
-      font-weight: normal;
-    }
-
-    body {
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    .row {
-      display: flex;
-    }
-
-
-    #top-bar {
-      display: flex;
-      height: 100px;
-      justify-content: center;
-      align-content: center;
-    }
-
-    .score-box {
-      text-align: center;
-      flex: 100%;
-    }
-
-    .downs-box {
-      text-align: center;
-      flex: 100%;
-    }
-
-    .time-box {
-      text-align: center;
-      flex: 100%;
-    }
-
-    .box-header {
-      user-select: none;
-      margin-top: 5px;
-      margin-bottom: 0px;
-      font-size: 28pt;
-      font-weight: 900;
-      font-family: "TrenchFont"
-    }
-
-    #score-text {
-      user-select: none;
-      margin-top: -5px;
-      font-size: 48pt;
-      font-weight: 900;
-      font-family: "TrenchFont";
-      color: chartreuse
-    }
-
-    #downs-text {
-      user-select: none;
-      margin-top: -5px;
-      font-size: 48pt;
-      font-weight: 900;
-      font-family: "TrenchFont";
-      color: rgb(243, 202, 69)
-    }
-
-    #time-text {
-      user-select: none;
-      margin-top: -5px;
-      font-size: 48pt;
-      font-weight: 900;
-      font-family: "TrenchFont";
-      color: rgb(228, 223, 182)
-    }
-
-
-    #field-container {
-      flex: 100%;
-      height: 350px;
-      background-image: url("./assets/field.png");
-      background-repeat: no-repeat;
-    }
-
-    #start-button {
-      user-select: none;
-      position: absolute;
-      background-color: crimson;
-      padding: 20px;
-      left: 250px;
-      top: 200px;
-      font-size: 64pt;
-      font-family: "TrenchFont";
-    }
-
-    /* Sprites */
-    #player-sprite {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-    }
-  </style>
 </head>
 
 <body>
@@ -166,12 +56,13 @@ function startGame() {
     // Display the time
     document.getElementById("time-text").innerHTML = count;
 
-    // If the count down is finished, write some text 
+    // If the count down is finished, end game
     if (count < 0) {
       clearInterval(x);
       document.getElementById('start-button').style.display = 'block';
       document.getElementById("time-text").innerHTML = "EXPIRED";
       isStarted = false
+      isPaused = false
     }
   }, 1000);
 
