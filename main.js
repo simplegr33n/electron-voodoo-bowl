@@ -16,6 +16,9 @@ function createWindow () {
     }
   })
 
+  // TODO: Remove, for Debug only.
+  mainWindow.webContents.openDevTools({mode:'undocked'})
+
   mainWindow.setMenu(null)
 
   // and load the index.html of the app.
@@ -55,5 +58,8 @@ app.on('activate', function () {
   }
 })
 
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+
