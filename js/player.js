@@ -44,7 +44,7 @@ module.exports = class Player {
                     gameManager.player.yPos++;
                     document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos] + "px";
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                // If spot Zombie
+                    // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1).name === "Zombie") {
                     console.log("zumbie!")
                     // clear Zombies (and Referees?) and reset Player
@@ -67,7 +67,7 @@ module.exports = class Player {
                     gameManager.player.yPos--;
                     document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos] + "px";
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                // If spot Zombie
+                    // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1).name === "Zombie") {
                     console.log("zumbie!")
                     // clear Zombies (and Referees?) and reset Player
@@ -95,7 +95,7 @@ module.exports = class Player {
                     gameManager.player.xPos--;
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos] + "px";
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                // If spot Zombie
+                    // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).name === "Zombie") {
                     // clear Zombies (and Referees?) and reset Player
                     gameManager.zombies = []
@@ -135,7 +135,7 @@ module.exports = class Player {
                         gameManager.player.set();
                         gameManager.setZombies()
                     }
-                // If spot Zombie
+                    // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Zombie") {
                     console.log("zumbie!")
                     // clear Zombies (and Referees?) and reset Player

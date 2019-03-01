@@ -35,12 +35,11 @@
 
   <script>
     const GameManager = require('./js/game_manager.js')
-    var gameManager = new GameManager() // most other js files will need this declared before they can be required and used
+    var gameManager = new GameManager() // most other js files will need GameManager instantiated before they can be required and used
     require('./js/_renderer.js');
-
   </script>
   <script>
-    // TODO: remove, for testing only (R for reload)
+    // TODO: remove, for testing only (Press "R" for reload)
     document.addEventListener("keydown", function (e) {
       if (e.which === 82) {
         location.reload();

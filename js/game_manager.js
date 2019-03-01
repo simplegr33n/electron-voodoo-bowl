@@ -20,8 +20,12 @@ module.exports = class GameManager {
     }
 
     startGame() {
-        // Create player
-        this.player = new Player()
+        // Create Player, or reset position of existing
+        if (this.player == null) {
+            this.player = new Player()
+        } else {
+            this.player.set()
+        }
 
         // Clear any Referee Tombstones from previous game, create new starting Tombstones
         gameManager.refereeTombstones = []
@@ -95,7 +99,7 @@ module.exports = class GameManager {
 
     // For generating entity locations (other than Player)
     getRandX(minX = 0) {
-        return Math.floor((Math.random() * (46 - minX)) + minX); 
+        return Math.floor((Math.random() * (46 - minX)) + minX);
     }
     getRandY() {
         return Math.floor((Math.random() * 33)); // 
