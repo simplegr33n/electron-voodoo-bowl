@@ -1,116 +1,109 @@
 @font-face {
-    font-family: 'FreedomFont';
-    src: url('./assets/fonts/FREEDOM.ttf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
-  }
+  font-family: 'TrenchFont';
+  src: url('./assets/fonts/trench100free.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
 
-  @font-face {
-    font-family: 'TrenchFont';
-    src: url('./assets/fonts/trench100free.ttf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
-  }
+body {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
 
-  body {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .row {
-    display: flex;
-  }
+.row {
+  display: flex;
+}
 
 
-  #top-bar {
-    display: flex;
-    height: 100px;
-    justify-content: center;
-    align-content: center;
-  }
+#top-bar {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-content: center;
+}
 
-  .score-box {
-    text-align: center;
-    flex: 100%;
-  }
+.score-box {
+  text-align: center;
+  flex: 100%;
+}
 
-  .downs-box {
-    text-align: center;
-    flex: 100%;
-  }
+.downs-box {
+  text-align: center;
+  flex: 100%;
+}
 
-  .time-box {
-    text-align: center;
-    flex: 100%;
-  }
+.time-box {
+  text-align: center;
+  flex: 100%;
+}
 
-  .box-header {
-    user-select: none;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    font-size: 28pt;
-    font-weight: 900;
-    font-family: "TrenchFont"
-  }
+.box-header {
+  user-select: none;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-size: 28pt;
+  font-weight: 900;
+  font-family: "TrenchFont"
+}
 
-  #score-text {
-    user-select: none;
-    margin-top: -5px;
-    font-size: 48pt;
-    font-weight: 900;
-    font-family: "TrenchFont";
-    color: chartreuse
-  }
+#score-text {
+  user-select: none;
+  margin-top: -5px;
+  font-size: 48pt;
+  font-weight: 900;
+  font-family: "TrenchFont";
+  color: chartreuse
+}
 
-  #downs-text {
-    user-select: none;
-    margin-top: -5px;
-    font-size: 48pt;
-    font-weight: 900;
-    font-family: "TrenchFont";
-    color: rgb(243, 202, 69)
-  }
+#downs-text {
+  user-select: none;
+  margin-top: -5px;
+  font-size: 48pt;
+  font-weight: 900;
+  font-family: "TrenchFont";
+  color: rgb(243, 202, 69)
+}
 
-  #time-text {
-    user-select: none;
-    margin-top: -5px;
-    font-size: 48pt;
-    font-weight: 900;
-    font-family: "TrenchFont";
-    color: rgb(228, 223, 182)
-  }
+#time-text {
+  user-select: none;
+  margin-top: -5px;
+  font-size: 48pt;
+  font-weight: 900;
+  font-family: "TrenchFont";
+  color: rgb(228, 223, 182)
+}
 
 
-  #field-container {
-    flex: 100%;
-    height: 350px;
-    background-image: url("./assets/field.png");
-    background-repeat: no-repeat;
-  }
+#field-container {
+  flex: 100%;
+  height: 350px;
+  background-image: url("./assets/field.png");
+  background-repeat: no-repeat;
+}
 
-  #start-button {
-    user-select: none;
-    position: absolute;
-    background-color: crimson;
-    padding: 20px;
-    left: 268px;
-    top: 200px;
-    font-size: 64pt;
-    font-family: "TrenchFont";
-  }
+#start-button {
+  user-select: none;
+  position: absolute;
+  background-color: crimson;
+  padding: 20px;
+  left: 268px;
+  top: 200px;
+  font-size: 64pt;
+  font-family: "TrenchFont";
+}
 
-  /* Sprites */
-  #player-sprite {
-    user-select: none;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-  }
-  .referee-tombstone-sprite {
-    user-select: none;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-  }
+/* Sprites */
+#player-sprite {
+  user-select: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+.referee-tombstone-sprite {
+  user-select: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}

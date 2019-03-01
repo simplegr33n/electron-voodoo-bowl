@@ -34,16 +34,20 @@ module.exports = class Player {
         // Up or W
         if ((keyCode == 38) || (keyCode == 87)) {
             if (player.yPos <= 31) {
-                player.yPos++;
-                document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                if (player.checkSpot(player.xPos, player.yPos + 1) == null) {
+                    player.yPos++;
+                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                }
             }
         }
 
         // Down or S
         if ((keyCode == 40) || (keyCode == 83)) {
             if (player.yPos >= 1) {
-                player.yPos--;
-                document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                if (player.checkSpot(player.xPos, player.yPos - 1) == null) {
+                    player.yPos--;
+                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                }
             }
         }
 
@@ -55,8 +59,10 @@ module.exports = class Player {
                 document.getElementById('player-sprite').style.transform = "scale(-1, 1)";
             }
             if (player.xPos >= 1) {
-                player.xPos--;
-                document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
+                if (player.checkSpot(player.xPos - 1, player.yPos) == null) {
+                    player.xPos--;
+                    document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
+                }
             }
 
         }
@@ -69,19 +75,33 @@ module.exports = class Player {
                 document.getElementById('player-sprite').style.transform = "scale(1, 1)";
             }
             if (player.xPos <= 44) {
-                player.xPos++;
-                document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
-                if (player.xPos == 45) {
-                    isPaused = true;
-                    player.playerScore += 7;
-                    document.getElementById('score-text').innerHTML = player.playerScore;
-                    player.set();
+                if (player.checkSpot(player.xPos + 1, player.yPos) == null) {
+                    player.xPos++;
+                    document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
+                    if (player.xPos == 45) {
+                        isPaused = true;
+                        player.playerScore += 7;
+                        document.getElementById('score-text').innerHTML = player.playerScore;
+                        player.set();
+                    }
                 }
             }
         }
     }
+
+    // returns object in spot, or null for free spot
     checkSpot(spotX, spotY) {
-        
+
+        var blocked = null
+
+        for (var i = 0; i < gameManager.refereeTombstones.length; i++) {
+            if ((gameManager.refereeTombstones[i].xPos == spotX) && (gameManager.refereeTombstones[i].yPos == spotY)) {
+                blocked = gameManager.refereeTombstones[i]
+                console.log("Referee Tombstone Block")
+            }
+        }
+
+        return blocked
     }
 
 
