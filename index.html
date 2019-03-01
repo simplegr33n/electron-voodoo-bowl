@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div id="start-button" onclick="startGame()">
+  <div id="start-button" onclick="gameManager.startGame()">
     START
   </div>
 
@@ -39,59 +39,14 @@
     require('./js/_renderer.js');
     const Player = require('./js/player.js');
 
-
     var isStarted = false;
     var isPaused = false;
 
-
     var player = new Player()
-
-    // TODO: move out of index.html...
-    function startGame() {
-      // Clear any tombstones from previous game
-      gameManager.refereeTombstones = []
-      while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
-        document.getElementsByClassName('referee-tombstone-sprite')[0].remove();
-      }
-
-      // layout some initial tombstones 'n such
-      gameManager.setRefereeTombstones();
-
-      // set onkeydown to player's move function
-      document.onkeydown = player.move;
-
-      isStarted = true;
-      var count = 60;
-      player.set();
-      player.playerScore = 0;
-      document.getElementById('score-text').innerHTML = player.playerScore;
-
-      // Update the count down every 1 second if not paused
-      var x = setInterval(function () {
-        if (!isPaused) {
-          count--;
-        }
-
-        // Display the time
-        document.getElementById("time-text").innerHTML = count;
-
-        // If the count down is finished, end game
-        if (count < 0) {
-          clearInterval(x);
-          document.getElementById('start-button').style.display = 'block';
-          document.getElementById('time-text').innerHTML = 'EXPIRED';
-          isStarted = false;
-          isPaused = false;
-          document.onkeydown = null;
-        }
-      }, 1000);
-
-      document.getElementById('start-button').style.display = 'none';
-    }
 
   </script>
   <script>
-    // TODO: remove, for testing only
+    // TODO: remove, for testing only (R for reload)
     document.addEventListener("keydown", function (e) {
       if (e.which === 82) {
         location.reload();

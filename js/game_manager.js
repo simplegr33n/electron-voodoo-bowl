@@ -12,6 +12,49 @@ module.exports = class GameManager {
         this.refereeTombstones = []
     }
 
+    // TODO: move out of index.html...
+    startGame() {
+        // Clear any tombstones from previous game
+        gameManager.refereeTombstones = []
+        while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
+            document.getElementsByClassName('referee-tombstone-sprite')[0].remove();
+        }
+
+        // layout some initial tombstones 'n such
+        gameManager.setRefereeTombstones();
+
+        // set onkeydown to player's move function
+        document.onkeydown = player.move;
+
+        isStarted = true;
+        var count = 60;
+        player.set();
+        player.playerScore = 0;
+        document.getElementById('score-text').innerHTML = player.playerScore;
+
+        // Update the count down every 1 second if not paused
+        var x = setInterval(function () {
+            if (!isPaused) {
+                count--;
+            }
+
+            // Display the time
+            document.getElementById("time-text").innerHTML = count;
+
+            // If the count down is finished, end game
+            if (count < 0) {
+                clearInterval(x);
+                document.getElementById('start-button').style.display = 'block';
+                document.getElementById('time-text').innerHTML = 'EXPIRED';
+                isStarted = false;
+                isPaused = false;
+                document.onkeydown = null;
+            }
+        }, 1000);
+
+        document.getElementById('start-button').style.display = 'none';
+    }
+
     setRefereeTombstones() {
         const refTombstoneOne = new RefereeTombstone(this.getRandX(), this.getRandY());
         const refTombstoneTwo = new RefereeTombstone(this.getRandX(), this.getRandY());
@@ -20,10 +63,11 @@ module.exports = class GameManager {
         this.refereeTombstones = [refTombstoneOne, refTombstoneTwo, refTombstoneThree]
     }
 
+
+    //TODO -- static methods?
     getRandX() {
         return Math.floor((Math.random() * 46)); // TODO: use this.xPositions.size (..but how?)
     }
-
     getRandY() {
         return Math.floor((Math.random() * 33)); // TODO: use this.xPositions.size (..but how?)
     }
