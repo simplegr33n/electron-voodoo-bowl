@@ -1,5 +1,8 @@
+let Referee = require('./referee.js');
 let RefereeTombstone = require('./referee_tombstone.js');
 let Zombie = require('./zombie.js');
+let Player = require('./player.js');
+
 
 module.exports = class GameManager {
     constructor() {
@@ -12,9 +15,14 @@ module.exports = class GameManager {
             285, 295, 305, 315, 325]; // 33 total (5 - 325)
         this.refereeTombstones = []
         this.zombies = []
+        this.isStarted = false;
+        this.isPaused = false;
     }
 
     startGame() {
+        // Create player
+        this.player = new Player()
+
         // Clear any Referee Tombstones from previous game, create new starting Tombstones
         gameManager.refereeTombstones = []
         while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
@@ -30,17 +38,17 @@ module.exports = class GameManager {
         gameManager.setZombies();
 
         // set onkeydown to player's move function
-        document.onkeydown = player.move;
+        document.onkeydown = this.player.move;
 
-        isStarted = true;
+        this.isStarted = true;
         var count = 60;
-        player.set();
-        player.playerScore = 0;
-        document.getElementById('score-text').innerHTML = player.playerScore;
+        this.player.set();
+        this.player.playerScore = 0;
+        document.getElementById('score-text').innerHTML = this.player.playerScore;
 
         // Update the count down every 1 second if not paused
         var x = setInterval(function () {
-            if (!isPaused) {
+            if (!this.isPaused) {
                 count--;
             }
 
@@ -52,8 +60,8 @@ module.exports = class GameManager {
                 clearInterval(x);
                 document.getElementById('start-button').style.display = 'block';
                 document.getElementById('time-text').innerHTML = 'EXPIRED';
-                isStarted = false;
-                isPaused = false;
+                this.isStarted = false;
+                this.isPaused = false;
                 document.onkeydown = null;
             }
         }, 1000);
@@ -69,10 +77,20 @@ module.exports = class GameManager {
     }
 
     setZombies() {
-        const zombieOne = new Zombie(this.getRandX(player.xPos + 1), this.getRandY());
-        const zombieTwo = new Zombie(this.getRandX(player.xPos + 1), this.getRandY());
+        const zombieOne = new Zombie(this.getRandX(this.player.xPos + 1), this.getRandY());
+        const zombieTwo = new Zombie(this.getRandX(this.player.xPos + 1), this.getRandY());
 
         this.zombies = [zombieOne, zombieTwo]
+
+        //TODO: don't call here (testing)
+        this.setReferees()
+    }
+
+    setReferees() {
+        const refereeOne = new Referee(this.getRandX(), this.getRandY());
+        const refereeTwo = new Referee(this.getRandX(), this.getRandY());
+
+        this.referees = [refereeOne, refereeTwo]
     }
 
     // For generating entity locations (other than Player)

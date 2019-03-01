@@ -2,8 +2,6 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-let Referee = require('./referee.js');
 
-const refereeOne = new Referee(11, 11);
 
 
