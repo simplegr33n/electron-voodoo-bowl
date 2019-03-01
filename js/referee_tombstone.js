@@ -14,6 +14,7 @@ module.exports = class Referee {
         spriteImage.className = "referee-tombstone-sprite";
         spriteImage.style.left = gameManager.xPositions[this.xPos] + "px";
         spriteImage.style.bottom = gameManager.yPositions[this.yPos] + "px";
+        spriteImage.style.zIndex = 100 - this.yPos
         document.getElementById('field-container').appendChild(spriteImage);
     }
   

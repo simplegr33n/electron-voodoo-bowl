@@ -1,4 +1,5 @@
 let RefereeTombstone = require('./referee_tombstone.js');
+let Zombie = require('./zombie.js');
 
 module.exports = class GameManager {
     constructor() {
@@ -10,18 +11,23 @@ module.exports = class GameManager {
             155, 165, 175, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275,
             285, 295, 305, 315, 325]; // 33 total (5 - 325)
         this.refereeTombstones = []
+        this.zombies = []
     }
 
-    // TODO: move out of index.html...
     startGame() {
-        // Clear any tombstones from previous game
+        // Clear any Referee Tombstones from previous game, create new starting Tombstones
         gameManager.refereeTombstones = []
         while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
             document.getElementsByClassName('referee-tombstone-sprite')[0].remove();
         }
-
-        // layout some initial tombstones 'n such
         gameManager.setRefereeTombstones();
+
+        // Clear Zombies from previous game, create new Zombies
+        gameManager.zombies = []
+        while (document.getElementsByClassName('zombie-sprite')[0]) {
+            document.getElementsByClassName('zombie-sprite')[0].remove();
+        }
+        gameManager.setZombies();
 
         // set onkeydown to player's move function
         document.onkeydown = player.move;
@@ -58,9 +64,15 @@ module.exports = class GameManager {
     setRefereeTombstones() {
         const refTombstoneOne = new RefereeTombstone(this.getRandX(), this.getRandY());
         const refTombstoneTwo = new RefereeTombstone(this.getRandX(), this.getRandY());
-        const refTombstoneThree = new RefereeTombstone(this.getRandX(), this.getRandY());
 
-        this.refereeTombstones = [refTombstoneOne, refTombstoneTwo, refTombstoneThree]
+        this.refereeTombstones = [refTombstoneOne, refTombstoneTwo]
+    }
+
+    setZombies() {
+        const zombieOne = new Zombie(this.getRandX(), this.getRandY());
+        const zombieTwo = new Zombie(this.getRandX(), this.getRandY());
+
+        this.zombies = [zombieOne, zombieTwo]
     }
 
 

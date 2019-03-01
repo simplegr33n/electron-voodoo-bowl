@@ -84,6 +84,7 @@ body {
 }
 
 #start-button {
+  z-index: 200;
   user-select: none;
   position: absolute;
   background-color: crimson;
@@ -96,6 +97,12 @@ body {
 
 /* Sprites */
 #player-sprite {
+  user-select: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+.zombie-sprite {
   user-select: none;
   position: absolute;
   width: 24px;

@@ -16,6 +16,7 @@ module.exports = class Player {
         spriteImage.id = "player-sprite";
         spriteImage.style.left = gameManager.xPositions[this.xPos] + "px"
         spriteImage.style.bottom = gameManager.yPositions[this.yPos] + "px"
+        spriteImage.style.zIndex = 100 - this.yPos
         document.getElementById('field-container').appendChild(spriteImage)
     }
 
@@ -24,6 +25,7 @@ module.exports = class Player {
         this.yPos = setY;
         document.getElementById('player-sprite').style.left = gameManager.xPositions[this.xPos] + "px";
         document.getElementById('player-sprite').style.bottom = gameManager.yPositions[this.yPos] + "px";
+        document.getElementById('player-sprite').style.zIndex = 100 - this.yPos
     }
 
     move(e) {
@@ -37,6 +39,7 @@ module.exports = class Player {
                 if (player.checkSpot(player.xPos, player.yPos + 1) == null) {
                     player.yPos++;
                     document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                    document.getElementById('player-sprite').style.zIndex = 100 - player.yPos
                 }
             }
         }
@@ -47,6 +50,7 @@ module.exports = class Player {
                 if (player.checkSpot(player.xPos, player.yPos - 1) == null) {
                     player.yPos--;
                     document.getElementById('player-sprite').style.bottom = gameManager.yPositions[player.yPos] + "px";
+                    document.getElementById('player-sprite').style.zIndex = 100 - player.yPos
                 }
             }
         }
@@ -62,6 +66,7 @@ module.exports = class Player {
                 if (player.checkSpot(player.xPos - 1, player.yPos) == null) {
                     player.xPos--;
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
+                    document.getElementById('player-sprite').style.zIndex = 100 - player.yPos
                 }
             }
 
@@ -78,11 +83,19 @@ module.exports = class Player {
                 if (player.checkSpot(player.xPos + 1, player.yPos) == null) {
                     player.xPos++;
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[player.xPos] + "px";
-                    if (player.xPos == 45) {
+                    document.getElementById('player-sprite').style.zIndex = 100 - player.yPos
+                    if (player.xPos == 45) { 
                         isPaused = true;
                         player.playerScore += 7;
                         document.getElementById('score-text').innerHTML = player.playerScore;
+
+                        // clear Zombies (and Referees?) and reset Player
+                        gameManager.zombies = []
+                        while (document.getElementsByClassName('zombie-sprite')[0]) {
+                            document.getElementsByClassName('zombie-sprite')[0].remove();
+                        }
                         player.set();
+                        gameManager.setZombies()
                     }
                 }
             }
@@ -98,6 +111,13 @@ module.exports = class Player {
             if ((gameManager.refereeTombstones[i].xPos == spotX) && (gameManager.refereeTombstones[i].yPos == spotY)) {
                 blocked = gameManager.refereeTombstones[i]
                 console.log("Referee Tombstone Block")
+            }
+        }
+
+        for (var i = 0; i < gameManager.zombies.length; i++) {
+            if ((gameManager.zombies[i].xPos == spotX) && (gameManager.zombies[i].yPos == spotY)) {
+                blocked = gameManager.zombies[i]
+                console.log("Zombie Block")
             }
         }
 
