@@ -6,19 +6,6 @@ module.exports = class Zombie {
     this.sprite = "./assets/zombie.png"
   }
 
-  moveUp() {
-
-  }
-  moveDown() {
-  
-  }
-  moveLeft() {
-  
-  }
-  moveRight() {
-  
-  }
-
   tackleSound() {
     console.log(this.name + " *Tackle*")
   }

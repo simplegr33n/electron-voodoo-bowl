@@ -25,7 +25,7 @@
 
   <div class="row">
     <div id="field-container">
-      <img id="player-sprite" src="./assets/player.gif" style="left: 277px; bottom: 175px">
+
     </div>
   </div>
 
@@ -35,20 +35,30 @@
 
   <script>
     require('./js/_renderer.js');
-
+    const Player = require('./js/player.js');
     var isStarted = false;
     var isPaused = false;
 
+    var player = new Player()
+
     // TODO: move out of index.html...
     function startGame() {
+
       isStarted = true;
       var count = 90;
+      player.set();
+      player.playerScore = 0;
+      document.getElementById('score-text').innerHTML = player.playerScore;
 
       // Update the count down every 1 second if not paused
       var x = setInterval(function () {
         if (!isPaused) {
           count--;
         }
+
+        // set onkeydown to player's move function
+        document.onkeydown = player.move;
+
 
         // Display the time
         document.getElementById("time-text").innerHTML = count;
@@ -60,6 +70,7 @@
           document.getElementById('time-text').innerHTML = 'EXPIRED';
           isStarted = false;
           isPaused = false;
+          document.onkeydown = null;
         }
       }, 1000);
 

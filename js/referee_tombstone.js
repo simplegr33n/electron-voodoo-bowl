@@ -6,15 +6,17 @@ module.exports = class Referee {
       this.yPos = yPos;
       this.name = "Referee Tombstone";
       this.sprite = "./assets/referee_tombstone.png";
+
+      this.render();
     }
 
     render() {
         var spriteImage = document.createElement("img");
         spriteImage.src = this.sprite;
         spriteImage.className = "referee-tombstone-sprite";
-        spriteImage.style.left = gameManager.xPositions[this.xPos] + "px"
-        spriteImage.style.bottom = gameManager.yPositions[this.yPos] + "px"
-        document.getElementById('field-container').appendChild(spriteImage)
+        spriteImage.style.left = gameManager.xPositions[this.xPos] + "px";
+        spriteImage.style.bottom = gameManager.yPositions[this.yPos] + "px";
+        document.getElementById('field-container').appendChild(spriteImage);
     }
   
     hereLies() {
