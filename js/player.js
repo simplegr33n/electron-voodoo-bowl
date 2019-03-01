@@ -1,5 +1,3 @@
-var gameManager = require('./game_manager');
-
 module.exports = class Player {
     constructor() {
         this.xPos = 14;
@@ -81,8 +79,12 @@ module.exports = class Player {
                 }
             }
         }
-
     }
+    checkSpot(spotX, spotY) {
+        
+    }
+
+
 }
 
 

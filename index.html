@@ -19,7 +19,7 @@
     </div>
     <div class="time-box">
       <p class="box-header">TIME</p>
-      <p id="time-text">90</p>
+      <p id="time-text">60</p>
     </div>
   </div>
 
@@ -34,18 +34,34 @@
   </div>
 
   <script>
+    const GameManager = require('./js/game_manager.js')
+    var gameManager = new GameManager() // most other js files will need this declared before they can be required and used
     require('./js/_renderer.js');
     const Player = require('./js/player.js');
+
+
     var isStarted = false;
     var isPaused = false;
+
 
     var player = new Player()
 
     // TODO: move out of index.html...
     function startGame() {
+      // Clear any tombstones from previous game
+      gameManager.refereeTombstones = []
+      while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
+        document.getElementsByClassName('referee-tombstone-sprite')[0].remove();
+      }
+
+      // layout some initial tombstones 'n such
+      gameManager.setRefereeTombstones();
+
+      // set onkeydown to player's move function
+      document.onkeydown = player.move;
 
       isStarted = true;
-      var count = 90;
+      var count = 60;
       player.set();
       player.playerScore = 0;
       document.getElementById('score-text').innerHTML = player.playerScore;
@@ -55,10 +71,6 @@
         if (!isPaused) {
           count--;
         }
-
-        // set onkeydown to player's move function
-        document.onkeydown = player.move;
-
 
         // Display the time
         document.getElementById("time-text").innerHTML = count;

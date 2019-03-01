@@ -103,11 +103,13 @@
 
   /* Sprites */
   #player-sprite {
+    user-select: none;
     position: absolute;
     width: 24px;
     height: 24px;
   }
   .referee-tombstone-sprite {
+    user-select: none;
     position: absolute;
     width: 24px;
     height: 24px;

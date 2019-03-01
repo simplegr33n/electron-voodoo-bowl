@@ -1,5 +1,3 @@
-var gameManager = require('./game_manager');
-
 module.exports = class Referee {
     constructor(xPos, yPos) {
       this.xPos = xPos;
