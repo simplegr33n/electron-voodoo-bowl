@@ -18,8 +18,4 @@ module.exports = class Zombie {
     document.getElementById('field-container').appendChild(spriteImage);
   }
 
-  tackleSound() {
-    console.log(this.name + " *Tackle*")
-  }
-
 }

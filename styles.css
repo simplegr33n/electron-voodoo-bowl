@@ -114,3 +114,9 @@ body {
   width: 24px;
   height: 24px;
 }
+.referee-sprite {
+  user-select: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}

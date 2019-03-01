@@ -17,8 +17,5 @@ module.exports = class Referee {
         spriteImage.style.zIndex = 100 - this.yPos
         document.getElementById('field-container').appendChild(spriteImage);
     }
-  
-    hereLies() {
-      console.log("Here lies a bad ref...");
-    }
+
   }

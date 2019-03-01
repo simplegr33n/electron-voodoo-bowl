@@ -69,19 +69,18 @@ module.exports = class GameManager {
     }
 
     setZombies() {
-        const zombieOne = new Zombie(this.getRandX(), this.getRandY());
-        const zombieTwo = new Zombie(this.getRandX(), this.getRandY());
+        const zombieOne = new Zombie(this.getRandX(player.xPos + 1), this.getRandY());
+        const zombieTwo = new Zombie(this.getRandX(player.xPos + 1), this.getRandY());
 
         this.zombies = [zombieOne, zombieTwo]
     }
 
-
-    //TODO -- static methods?
-    getRandX() {
-        return Math.floor((Math.random() * 46)); // TODO: use this.xPositions.size (..but how?)
+    // For generating entity locations (other than Player)
+    getRandX(minX = 0) {
+        return Math.floor((Math.random() * (46 - minX)) + minX); 
     }
     getRandY() {
-        return Math.floor((Math.random() * 33)); // TODO: use this.xPositions.size (..but how?)
+        return Math.floor((Math.random() * 33)); // 
     }
 
 }

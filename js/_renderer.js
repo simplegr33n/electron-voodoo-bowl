@@ -5,5 +5,5 @@
 let Referee = require('./referee.js');
 
 const refereeOne = new Referee(11, 11);
-refereeOne.whistleSound();
+
 

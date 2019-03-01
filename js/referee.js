@@ -4,9 +4,18 @@ module.exports = class Referee {
       this.yPos = yPos;
       this.name = "Referee";
       this.sprite = "./assets/referee.png";
+
+      this.render()
     }
-  
-    whistleSound() {
-      console.log(this.name + " *Whistle Blow*");
+
+    render() {
+      var spriteImage = document.createElement("img");
+      spriteImage.src = this.sprite;
+      spriteImage.className = "referee-sprite";
+      spriteImage.style.left = gameManager.xPositions[this.xPos] + "px";
+      spriteImage.style.bottom = gameManager.yPositions[this.yPos] + "px";
+      spriteImage.style.zIndex = 100 - this.yPos
+      document.getElementById('field-container').appendChild(spriteImage);
     }
+
   }
