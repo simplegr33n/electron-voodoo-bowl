@@ -54,7 +54,7 @@ body {
 #downs-text {
   user-select: none;
   margin-top: -5px;
-  font-size: 48pt;
+  font-size: 36pt;
   font-weight: 900;
   font-family: "TrenchFont";
   color: rgb(243, 202, 69)
@@ -105,6 +105,12 @@ body {
   height: 24px;
 }
 .referee-sprite {
+  user-select: none;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+.marker-sprite {
   user-select: none;
   position: absolute;
   width: 32px;

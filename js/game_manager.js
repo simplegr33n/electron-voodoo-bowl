@@ -2,6 +2,7 @@ let Referee = require('./referee.js');
 let RefereeTombstone = require('./referee_tombstone.js');
 let Zombie = require('./zombie.js');
 let Player = require('./player.js');
+let Marker = require('./marker.js')
 
 
 module.exports = class GameManager {
@@ -19,6 +20,8 @@ module.exports = class GameManager {
         this.isStarted = false;
         this.isPaused = false;
         this.player = null;
+        this.downsManager = null;
+        this.gameLoop = null;
     }
 
     startGame() {
@@ -28,7 +31,58 @@ module.exports = class GameManager {
         } else {
             this.player.set()
         }
+        // Get instance of DownsManager, or reset existing
+        if (this.downsManager == null) {
+            this.downsManager = new DownsManager()
+        } else {
+            this.downsManager.reset()
+        }
 
+        // Reset Entities (other than player)
+        this.resetEntities()
+
+        // set onkeydown to player's move function
+        document.onkeydown = this.player.move;
+
+        this.isStarted = true;
+        var count = 60;
+        this.player.set();
+        this.player.playerScore = 0;
+        document.getElementById('score-text').innerHTML = this.player.playerScore;
+
+        // Update the count down every 1 second if not paused
+        this.gameLoop = setInterval(function () {
+            if (!this.isPaused) {
+                count--;
+            }
+
+            // Display the time
+            document.getElementById("time-text").innerHTML = count;
+
+            // Iterate through Zombie move functions
+            for (var i = 0; i < gameManager.zombies.length; i++) {
+                gameManager.zombies[i].move()
+            }
+
+            // If the count down is finished, end game
+            if (count < 0) {
+                gameManager.endGame()
+            }
+        }, 1000);
+
+        document.getElementById('start-button').style.display = 'none';
+    }
+
+    endGame() {
+        clearInterval(this.gameLoop);
+        document.getElementById('start-button').style.display = 'block';
+        document.getElementById('time-text').innerHTML = '--';
+        this.isStarted = false;
+        this.isPaused = false;
+        document.onkeydown = null;
+    }
+
+    resetEntities() {
         // Clear any Referee Tombstones from previous game, create new starting Tombstones
         gameManager.refereeTombstones = []
         while (document.getElementsByClassName('referee-tombstone-sprite')[0]) {
@@ -49,42 +103,6 @@ module.exports = class GameManager {
             document.getElementsByClassName('referee-sprite')[0].remove();
         }
         gameManager.setReferees();
-
-        // set onkeydown to player's move function
-        document.onkeydown = this.player.move;
-
-        this.isStarted = true;
-        var count = 60;
-        this.player.set();
-        this.player.playerScore = 0;
-        document.getElementById('score-text').innerHTML = this.player.playerScore;
-
-        // Update the count down every 1 second if not paused
-        var x = setInterval(function () {
-            if (!this.isPaused) {
-                count--;
-            }
-
-            // Display the time
-            document.getElementById("time-text").innerHTML = count;
-
-            // Iterate through Zombie move functions
-            for (var i = 0; i < gameManager.zombies.length; i++) {
-                gameManager.zombies[i].move()
-            }
-
-            // If the count down is finished, end game
-            if (count < 0) {
-                clearInterval(x);
-                document.getElementById('start-button').style.display = 'block';
-                document.getElementById('time-text').innerHTML = 'EXPIRED';
-                this.isStarted = false;
-                this.isPaused = false;
-                document.onkeydown = null;
-            }
-        }, 1000);
-
-        document.getElementById('start-button').style.display = 'none';
     }
 
     setRefereeTombstones() {
@@ -114,4 +132,77 @@ module.exports = class GameManager {
         return Math.floor((Math.random() * 33)); // 
     }
 
+}
+
+class DownsManager {
+    constructor() {
+        this.reset()
+    }
+
+    advanceDowns() {
+        // If achieved first down:
+        if (gameManager.player.xPos >= this.firstDownMarker) {
+            this.reset()
+        } else {
+            switch (this.downCount) {
+                case 1:
+                    this.ballMarker = gameManager.player.xPos
+                    this.downCount += 1
+                    if (this.firstDownMarker >= 44) {
+                        this.firstDownMarker = 44
+                        document.getElementById('downs-text').innerHTML = '2nd and Goal'
+                    } else {
+                        document.getElementById('downs-text').innerHTML = '2nd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
+                    }
+                    this.renderMarkers()
+                    break
+                case 2:
+                    this.ballMarker = gameManager.player.xPos
+                    this.downCount += 1
+                    if (this.firstDownMarker >= 44) {
+                        this.firstDownMarker = 44
+                        document.getElementById('downs-text').innerHTML = '3rd and Goal'
+                    } else {
+                        document.getElementById('downs-text').innerHTML = '3rd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
+                    }
+                    this.renderMarkers()
+                    break
+                case 3: // Game Over
+                    document.getElementById('downs-text').innerHTML = 'Game Over'
+                    gameManager.endGame()
+                    break
+                default:
+                    break
+            }
+        }
+        console.log("downCount: " + this.downCount + ", ball  on: " + this.ballMarker + " , first down at: " + this.firstDownMarker)
+    }
+
+    reset() {
+        this.ballMarker = gameManager.player.xPos
+        this.firstDownMarker = this.ballMarker + 4
+        this.downCount = 1
+        if (this.firstDownMarker >= 44) {
+            this.firstDownMarker = 44
+            document.getElementById('downs-text').innerHTML = '1st and Goal'
+        } else {
+            document.getElementById('downs-text').innerHTML = '1st and 10'
+        }
+        this.renderMarkers()
+    }
+
+    renderMarkers() {
+        // Clear old markers
+        this.clearMarkers()
+        // Render new markers
+        Marker.renderFirstMarker(this.firstDownMarker)
+        Marker.renderBallMarker(this.ballMarker)
+    }
+
+    clearMarkers() {
+        // Remove old markers
+        while (document.getElementsByClassName('marker-sprite')[0]) {
+            document.getElementsByClassName('marker-sprite')[0].remove();
+        }
+    }
 }

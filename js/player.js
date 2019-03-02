@@ -43,6 +43,9 @@ module.exports = class Player {
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1).name === "Zombie") {
+                    // Advance Downs
+                    gameManager.downsManager.advanceDowns()
+
                     // clear Zombies (and Referees?) and reset Player
                     gameManager.zombies = []
                     while (document.getElementsByClassName('zombie-sprite')[0]) {
@@ -73,6 +76,9 @@ module.exports = class Player {
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1).name === "Zombie") {
+                    // Advance Downs
+                    gameManager.downsManager.advanceDowns()
+
                     // clear Zombies (and Referees?) and reset Player
                     gameManager.zombies = []
                     while (document.getElementsByClassName('zombie-sprite')[0]) {
@@ -108,6 +114,9 @@ module.exports = class Player {
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).name === "Zombie") {
+                    // Advance Downs
+                    gameManager.downsManager.advanceDowns()
+
                     // clear Zombies (and Referees?) and reset Player
                     gameManager.zombies = []
                     while (document.getElementsByClassName('zombie-sprite')[0]) {
@@ -118,6 +127,9 @@ module.exports = class Player {
                     gameManager.setZombies()
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).name === "Referee") {
+                    // Advance Downs
+                    gameManager.downsManager.advanceDowns()
+
                     gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).die()
                     gameManager.player.xPos--;
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos - 1] + "px";
@@ -142,6 +154,7 @@ module.exports = class Player {
                     gameManager.player.xPos++;
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos] + "px";
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
+                    // If touchdown
                     if (gameManager.player.xPos == 45) {
                         gameManager.isPaused = true;
                         gameManager.player.playerScore += 7;
@@ -151,11 +164,15 @@ module.exports = class Player {
                         while (document.getElementsByClassName('zombie-sprite')[0]) {
                             document.getElementsByClassName('zombie-sprite')[0].remove();
                         }
-                        gameManager.player.set();
+                        gameManager.player.set()
+                        gameManager.downsManager.reset()
                         gameManager.setZombies()
                     }
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Zombie") {
+                    // Advance Downs
+                    gameManager.downsManager.advanceDowns()
+
                     // clear Zombies (and Referees?) and reset Player
                     gameManager.zombies = []
                     while (document.getElementsByClassName('zombie-sprite')[0]) {
