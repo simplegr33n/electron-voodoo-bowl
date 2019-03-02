@@ -68,6 +68,11 @@ module.exports = class GameManager {
             // Display the time
             document.getElementById("time-text").innerHTML = count;
 
+            // Iterate through Zombie move functions
+            for (var i = 0; i < gameManager.zombies.length; i++) {
+                gameManager.zombies[i].move()
+            }
+
             // If the count down is finished, end game
             if (count < 0) {
                 clearInterval(x);
@@ -89,7 +94,7 @@ module.exports = class GameManager {
     }
 
     setZombies() {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 13; i++) {
             gameManager.zombies.push(new Zombie("zomID_" + i, this.getRandX(this.player.xPos + 1), this.getRandY()))
         }
     }
