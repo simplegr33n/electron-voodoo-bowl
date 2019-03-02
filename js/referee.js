@@ -21,10 +21,9 @@ module.exports = class Referee {
   }
 
   die() {
+    // TODO: FIGURE ahhhh.
 
     console.log(this.id + "PRE" + gameManager.referees.length +"\n"+gameManager.referees)
-
-
 
     for (var i = 0; i < gameManager.referees.length; i++) {
       if(gameManager.referees[i].id === this.id) {

@@ -83,17 +83,15 @@ module.exports = class GameManager {
     }
 
     setRefereeTombstones() {
-        const refTombstoneOne = new RefereeTombstone(this.getRandX(), this.getRandY());
-        const refTombstoneTwo = new RefereeTombstone(this.getRandX(), this.getRandY());
-
-        this.refereeTombstones = [refTombstoneOne, refTombstoneTwo]
+        for (var i = 0; i < 3; i++) {
+            gameManager.refereeTombstones.push(new RefereeTombstone(this.getRandX(), this.getRandY()))
+        }
     }
 
     setZombies() {
-        const zombieOne = new Zombie(this.getRandX(this.player.xPos + 1), this.getRandY());
-        const zombieTwo = new Zombie(this.getRandX(this.player.xPos + 1), this.getRandY());
-
-        this.zombies = [zombieOne, zombieTwo]
+        for (var i = 0; i < 3; i++) {
+            gameManager.zombies.push(new Zombie("zomID_" + i, this.getRandX(this.player.xPos + 1), this.getRandY()))
+        }
     }
 
     setReferees() {
