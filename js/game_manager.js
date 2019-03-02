@@ -13,10 +13,12 @@ module.exports = class GameManager {
         this.yPositions = [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145,
             155, 165, 175, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275,
             285, 295, 305, 315, 325]; // 33 total (5 - 325)
-        this.refereeTombstones = []
-        this.zombies = []
+        this.referees = [];
+        this.refereeTombstones = [];
+        this.zombies = [];
         this.isStarted = false;
         this.isPaused = false;
+        this.player = null;
     }
 
     startGame() {
@@ -40,6 +42,13 @@ module.exports = class GameManager {
             document.getElementsByClassName('zombie-sprite')[0].remove();
         }
         gameManager.setZombies();
+
+        // Clear Referees from previous game, create new Referees
+        gameManager.referees = []
+        while (document.getElementsByClassName('referee-sprite')[0]) {
+            document.getElementsByClassName('referee-sprite')[0].remove();
+        }
+        gameManager.setReferees();
 
         // set onkeydown to player's move function
         document.onkeydown = this.player.move;
@@ -85,16 +94,13 @@ module.exports = class GameManager {
         const zombieTwo = new Zombie(this.getRandX(this.player.xPos + 1), this.getRandY());
 
         this.zombies = [zombieOne, zombieTwo]
-
-        //TODO: don't call here (testing)
-        this.setReferees()
     }
 
     setReferees() {
-        const refereeOne = new Referee(this.getRandX(), this.getRandY());
-        const refereeTwo = new Referee(this.getRandX(), this.getRandY());
-
-        this.referees = [refereeOne, refereeTwo]
+        for (var i = 0; i < 3; i++) {
+            gameManager.referees.push(new Referee("refID_" + i, this.getRandX(), this.getRandY()))
+        }
+        console.log("Referees: " + gameManager.referees)
     }
 
     // For generating entity locations (other than Player)
