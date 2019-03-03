@@ -68,8 +68,10 @@ body {
   color: rgb(228, 223, 182)
 }
 #field-container {
+  position: relative;
   flex: 100%;
   height: 350px;
+  width: 800px;
   background-image: url("./assets/field.png");
   background-repeat: no-repeat;
 }
