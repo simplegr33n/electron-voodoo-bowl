@@ -4,7 +4,7 @@ module.exports = class Zombie {
 		this.yPos = yPos
 		this.id = id
 		this.name = "Zombie"
-		this.sprite = "./assets/zombie.png"
+		this.sprite = "./assets/zombie.gif"
 
 		this.render()
 	}
