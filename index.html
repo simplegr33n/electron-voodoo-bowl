@@ -37,6 +37,15 @@
     const GameManager = require('./js/game_manager.js')
     var gameManager = new GameManager() // most other js files will need GameManager instantiated before they can be required and used
     require('./js/_renderer.js');
+    require('dotenv').config()
+    try {
+      const FIREBASE_KEY = process.env.FIREBASE_KEY
+      console.log("Env key: " + FIREBASE_KEY)
+    } catch {
+      console.log("Env key error")
+    }
+
+
   </script>
   <script>
     // TODO: remove, for testing only (Press "R" for reload)
