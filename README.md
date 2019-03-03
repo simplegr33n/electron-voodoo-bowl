@@ -20,7 +20,7 @@ To clone and run electron-voodoo-bowl you'll need [Git](https://git-scm.com) and
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/simplegr33n/electron-voodoo-bowl
 # Go into the repository
 cd electron-quick-start
 # Install dependencies
