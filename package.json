@@ -1,23 +1,24 @@
 {
-  "name": "electron-quick-start",
+  "name": "electron-voodoo-bowl",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Voodoo Bowl clone in JavaScript",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/simplegr33n/electron-voodoo-bowl",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Voodoo",
+    "Bowl",
+    "Football"
   ],
-  "author": "GitHub",
+  "author": "Geoff Golda <ggdev3@gmail.com>",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^4.0.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "electron-packager": "^13.1.0"
+  }
 }
