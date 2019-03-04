@@ -1,12 +1,17 @@
 {
   "name": "express-voodoo-bowl",
   "version": "1.0.0",
-  "description": "",
+  "description": "Voodoo Bowl rebuilt with JS in Express",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "engines": {
+    "node": "10.15.0"
+  },
+  "author": "Geoff Golda <gcgolda@gmail.com>",
+  "repository": "https://github.com/simplegr33n/electron-voodoo-bowl",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
