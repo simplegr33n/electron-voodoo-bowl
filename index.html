@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles/styles.css">
   <meta charset="UTF-8">
   <title>Electron Bowl!</title>
 </head>
@@ -13,7 +13,6 @@
 
     <div class="row">
       <div id="field-container">
-
       </div>
     </div>
 
@@ -32,26 +31,21 @@
       </div>
     </div>
 
+    
+
   </div>
 
   <div id="start-button" onclick="gameManager.startGame()">
     START
   </div>
 
+  <script src="/bundle.js"></script>
+
   <script>
-    require('dotenv').config() // for environmental variables
-    const GameManager = require('./js/game_manager.js')
-    var gameManager = new GameManager() // most other js files will need GameManager instantiated before they can be required and used
-    require('./js/_renderer.js');
-
-    try {
-      const FIREBASE_KEY = process.env.FIREBASE_KEY
-      console.log("Env key: " + FIREBASE_KEY)
-    } catch {
-      console.log("Env key error")
-    }
-
+    //const GameManager = require('./js/game_manager.js')
+     // most other js files will need GameManager instantiated before they can be required and used
   </script>
+
   <script>
     // TODO: remove, for testing only (Press "R" for reload)
     document.addEventListener("keydown", function (e) {

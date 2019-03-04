@@ -1,7 +1,7 @@
 /* Fonts */
 @font-face {
   font-family: 'TrenchFont';
-  src: url('./assets/fonts/trench100free.ttf') format('truetype');
+  src: url('/assets/fonts/trench100free.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
@@ -14,7 +14,6 @@ body {
   margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
-
 }
 
 /* UI */
@@ -76,7 +75,7 @@ body {
   position: relative;
   flex: 100%;
   height: 350px;
-  background-image: url("./assets/field.png");
+  background-image: url("/assets/field.png");
   background-repeat: no-repeat;
 }
 #start-button {
