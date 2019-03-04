@@ -5,14 +5,17 @@ Suffice it to say that Voodoo Bowl was a Java applet that ran in the browser, an
 
 <img src="https://github.com/simplegr33n/electron-voodoo-bowl/blob/master/READMEres/03022019.gif">
 
-The result is not polished, but it was fun to build, and I may come back to it in the future.
-
-## TODO
+## Potential TODOs
+* improve collision detection/handling
 * add game sounds
 * add music sountrack (?)
 * tie into firebase for highscores
 * replace all borrowed assets
 * refactor, refactor, refactor. (refactor)
+* difficulties
+* powerups
+* etc
+* refactor
 
 ## To Use
 
