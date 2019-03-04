@@ -9,26 +9,29 @@
 
 <body>
 
+  <div id="body-wrapper">
 
-  <div class="row">
-    <div id="field-container">
+    <div class="row">
+      <div id="field-container">
 
+      </div>
     </div>
-  </div>
 
-  <div id="top-bar" style="background-color:#495679;">
-    <div class="score-box">
-      <p class="box-header">SCORE</p>
-      <p id="score-text">0</p>
+    <div id="bottom-bar" style="background-color:#495679;">
+      <div class="score-box">
+        <p class="box-header">SCORE</p>
+        <p id="score-text">0</p>
+      </div>
+      <div class="downs-box">
+        <p class="box-header">DOWNS</p>
+        <p id="downs-text">1st and 10</p>
+      </div>
+      <div class="time-box">
+        <p class="box-header">TIME</p>
+        <p id="time-text">60</p>
+      </div>
     </div>
-    <div class="downs-box">
-      <p class="box-header">DOWNS</p>
-      <p id="downs-text">1st and 10</p>
-    </div>
-    <div class="time-box">
-      <p class="box-header">TIME</p>
-      <p id="time-text">60</p>
-    </div>
+
   </div>
 
   <div id="start-button" onclick="gameManager.startGame()">
@@ -40,7 +43,7 @@
     const GameManager = require('./js/game_manager.js')
     var gameManager = new GameManager() // most other js files will need GameManager instantiated before they can be required and used
     require('./js/_renderer.js');
-    
+
     try {
       const FIREBASE_KEY = process.env.FIREBASE_KEY
       console.log("Env key: " + FIREBASE_KEY)
