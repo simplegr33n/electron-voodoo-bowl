@@ -95,31 +95,30 @@ body {
 #player-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 .zombie-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 .referee-tombstone-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
 }
 .referee-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 .marker-sprite {
-  opacity: 0.85;
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }

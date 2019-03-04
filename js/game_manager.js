@@ -11,9 +11,8 @@ module.exports = class GameManager {
             263, 277, 290, 303, 317, 330, 343, 357, 370, 383, 397, 410, 423,
             437, 450, 463, 477, 490, 503, 517, 530, 543, 557, 570, 583, 597,
             610, 623, 637, 650, 663, 677, 690]; // 46 total (90 - 690)
-        this.yPositions = [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145,
-            155, 165, 175, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275,
-            285, 295, 305, 315, 325]; // 33 total (5 - 325)
+        this.yPositions = [5, 25, 45, 65, 85, 105, 125, 145, 165, 185, 205, 225, 245, 265,
+            285, 305]; // 31 total (5 - 305)
         this.referees = [];
         this.refereeTombstones = [];
         this.zombies = [];
@@ -126,10 +125,10 @@ module.exports = class GameManager {
 
     // For generating entity locations (other than Player)
     getRandX(minX = 0) {
-        return Math.floor((Math.random() * (46 - minX)) + minX);
+        return Math.floor((Math.random() * (this.xPositions.length - minX)) + minX);
     }
     getRandY() {
-        return Math.floor((Math.random() * 33)); // 
+        return Math.floor((Math.random() * this.yPositions.length)); // 
     }
 
 }

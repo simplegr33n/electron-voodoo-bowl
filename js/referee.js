@@ -38,6 +38,10 @@ module.exports = class Referee {
 
 				gameManager.referees.pop(gameManager.referees[i])
 
+				// Update player score
+				gameManager.player.playerScore += 2;
+                document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
+
 			}
 		}
 

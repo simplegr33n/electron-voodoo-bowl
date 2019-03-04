@@ -1,7 +1,7 @@
 module.exports = class Player {
     constructor() {
         this.xPos = 14;
-        this.yPos = 17;
+        this.yPos = Math.round(gameManager.yPositions.length / 2);
         this.playerForward = true;
         this.name = "Player";
         this.spriteSource = "././assets/player.gif";
@@ -20,7 +20,7 @@ module.exports = class Player {
         document.getElementById('field-container').appendChild(spriteImage)
     }
 
-    set(setX = 14, setY = 17) {
+    set(setX = 14, setY = Math.round(gameManager.yPositions.length / 2)) {
         this.xPos = setX;
         this.yPos = setY;
         document.getElementById('player-sprite').style.left = gameManager.xPositions[this.xPos] + "px";
@@ -39,29 +39,17 @@ module.exports = class Player {
                 // If spot clear (null)
                 if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1) == null) {
                     gameManager.player.yPos++;
-                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
+
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1).name === "Zombie") {
-                    // Advance Downs
-                    gameManager.downsManager.advanceDowns()
+                    gameManager.player.die()
 
-                    // clear Zombies (and Referees?) and reset Player
-                    gameManager.zombies = []
-                    while (document.getElementsByClassName('zombie-sprite')[0]) {
-                        document.getElementsByClassName('zombie-sprite')[0].remove();
-                    }
-                    gameManager.isPaused = true
-                    gameManager.player.set(gameManager.player.xPos);
-                    gameManager.setZombies()
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1).name === "Referee") {
-                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos + 1).die()
                     gameManager.player.yPos++;
-                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos + 1] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                    gameManager.player.playerScore += 2;
-                    document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
+                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos).die() // Kill ref
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
                 }
             }
         }
@@ -72,29 +60,17 @@ module.exports = class Player {
                 // If spot clear (null)
                 if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1) == null) {
                     gameManager.player.yPos--;
-                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
+
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1).name === "Zombie") {
-                    // Advance Downs
-                    gameManager.downsManager.advanceDowns()
+                    gameManager.player.die()
 
-                    // clear Zombies (and Referees?) and reset Player
-                    gameManager.zombies = []
-                    while (document.getElementsByClassName('zombie-sprite')[0]) {
-                        document.getElementsByClassName('zombie-sprite')[0].remove();
-                    }
-                    gameManager.isPaused = true
-                    gameManager.player.set(gameManager.player.xPos);
-                    gameManager.setZombies()
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1).name === "Referee") {
-                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos - 1).die()
                     gameManager.player.yPos--;
-                    document.getElementById('player-sprite').style.bottom = gameManager.yPositions[gameManager.player.yPos - 1] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                    gameManager.player.playerScore += 2;
-                    document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
+                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos).die() // Kill ref
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
                 }
             }
         }
@@ -110,32 +86,18 @@ module.exports = class Player {
                 // If spot clear (null)
                 if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos) == null) {
                     gameManager.player.xPos--;
-                    document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
+
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).name === "Zombie") {
-                    // Advance Downs
-                    gameManager.downsManager.advanceDowns()
+                    gameManager.player.die()
 
-                    // clear Zombies (and Referees?) and reset Player
-                    gameManager.zombies = []
-                    while (document.getElementsByClassName('zombie-sprite')[0]) {
-                        document.getElementsByClassName('zombie-sprite')[0].remove();
-                    }
-                    gameManager.isPaused = true
-                    gameManager.player.set(gameManager.player.xPos);
-                    gameManager.setZombies()
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).name === "Referee") {
-                    // Advance Downs
-                    gameManager.downsManager.advanceDowns()
-
-                    gameManager.player.checkSpot(gameManager.player.xPos - 1, gameManager.player.yPos).die()
                     gameManager.player.xPos--;
-                    document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos - 1] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                    gameManager.player.playerScore += 2;
-                    document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
+                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos).die() // Kill ref
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
+
                 }
             }
 
@@ -155,7 +117,7 @@ module.exports = class Player {
                     document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos] + "px";
                     document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
                     // If touchdown
-                    if (gameManager.player.xPos == 45) {
+                    if (gameManager.player.xPos == gameManager.xPositions.length - 2) {
                         gameManager.isPaused = true;
                         gameManager.player.playerScore += 7;
                         document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
@@ -170,25 +132,13 @@ module.exports = class Player {
                     }
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Zombie") {
-                    // Advance Downs
-                    gameManager.downsManager.advanceDowns()
-
-                    // clear Zombies (and Referees?) and reset Player
-                    gameManager.zombies = []
-                    while (document.getElementsByClassName('zombie-sprite')[0]) {
-                        document.getElementsByClassName('zombie-sprite')[0].remove();
-                    }
-                    gameManager.isPaused = true
-                    gameManager.player.set(gameManager.player.xPos);
-                    gameManager.setZombies()
+                    gameManager.player.die()
+                
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Referee") {
-                    gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).die()
                     gameManager.player.xPos++;
-                    document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos + 1] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
-                    gameManager.player.playerScore += 2;
-                    document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
+                    gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos).die() // Kill ref
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)           
                 }
             }
         }
@@ -196,7 +146,6 @@ module.exports = class Player {
 
     // returns object in spot, or null for free spot
     checkSpot(spotX, spotY) {
-
         var entity = null
 
         for (var i = 0; i < gameManager.refereeTombstones.length; i++) {
@@ -221,6 +170,20 @@ module.exports = class Player {
         }
 
         return entity
+    }
+
+    die(xPos, yPos) {
+        // Advance Downs
+        gameManager.downsManager.advanceDowns()
+
+        // clear Zombies (and Referees?) and reset Player
+        gameManager.zombies = []
+        while (document.getElementsByClassName('zombie-sprite')[0]) {
+            document.getElementsByClassName('zombie-sprite')[0].remove();
+        }
+        gameManager.isPaused = true
+        gameManager.player.set(gameManager.player.xPos);
+        gameManager.setZombies()
     }
 
 
