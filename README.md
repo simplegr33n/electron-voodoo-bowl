@@ -22,7 +22,7 @@ To clone and run electron-voodoo-bowl you'll need [Git](https://git-scm.com) and
 # Clone this repository
 git clone https://github.com/simplegr33n/electron-voodoo-bowl
 # Go into the repository
-cd electron-quick-start
+cd electron-voodoo-bowl
 # Install dependencies
 npm install
 # Run the app
