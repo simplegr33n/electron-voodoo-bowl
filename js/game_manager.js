@@ -7,12 +7,10 @@ let Marker = require('./marker.js')
 
 module.exports = class GameManager {
     constructor() {
-        this.xPositions = [89, 102, 117, 130, 143, 157, 170, 183, 197, 210, 223, 237, 250,
-            263, 277, 290, 303, 317, 330, 343, 357, 370, 383, 397, 410, 423,
-            437, 450, 463, 477, 490, 503, 517, 530, 543, 557, 570, 583, 597,
-            610, 623, 637, 650, 663, 677, 690]; // 46 total (90 - 690)
-        this.yPositions = [5, 25, 45, 65, 85, 105, 125, 145, 165, 185, 205, 225, 245, 265,
-            285, 305]; // 31 total (5 - 305)
+        this.fieldWidth = 10000;
+        this.fieldHeight = 800;
+        this.xPositions = [];
+        this.yPositions = [];
         this.referees = [];
         this.refereeTombstones = [];
         this.zombies = [];
@@ -21,6 +19,9 @@ module.exports = class GameManager {
         this.player = null;
         this.downsManager = null;
         this.gameLoop = null;
+
+        this.getXPositionArray(); // log an array based on fieldWidth / 150 (yards) -- use if changing fieldWidth to get new Array
+        this.getYPositionArray(); // 13? vertical positions
     }
 
     startGame() {
@@ -79,6 +80,44 @@ module.exports = class GameManager {
         this.isStarted = false;
         this.isPaused = false;
         document.onkeydown = null;
+    }
+
+    getXPositionArray() {
+ 
+        var yardInPixels = Math.round(this.fieldWidth / 150)
+        var progress = 0;
+        var next = Math.round(progress + yardInPixels);
+        console.log("ok.."+ progress + "->" + next + " fw: " + this.fieldWidth)
+
+        var testArray = [0]
+
+        for (next; next <= this.fieldWidth; next += yardInPixels) {
+            testArray.push(next);
+           
+        }
+        this.xPositions = testArray;
+
+        // Get array in logs to plug into GameManager constructor
+        console.log("FW: [" + testArray + "]");
+    }
+
+    getYPositionArray() {
+ 
+        var stepInPixels = Math.round(this.fieldHeight / 13)
+        var progress = 0;
+        var next = Math.round(progress + stepInPixels);
+        console.log("ok.."+ progress + "->" + next + " fh: " + this.fieldHeight)
+
+        var testArray = [0]
+
+        for (next; next <= this.fieldHeight; next += stepInPixels) {
+            testArray.push(next);
+           
+        }
+        this.yPositions = testArray;
+
+        // Get array in logs to plug into GameManager constructor
+        console.log("FH: [" + testArray + "]");
     }
 
     resetEntities() {
@@ -147,8 +186,8 @@ class DownsManager {
                 case 1:
                     this.ballMarker = gameManager.player.xPos
                     this.downCount += 1
-                    if (this.firstDownMarker >= 44) {
-                        this.firstDownMarker = 44
+                    if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
+                        this.firstDownMarker = gameManager.xPositions.length - 3
                         document.getElementById('downs-text').innerHTML = '2nd and Goal'
                     } else {
                         document.getElementById('downs-text').innerHTML = '2nd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
@@ -158,8 +197,8 @@ class DownsManager {
                 case 2:
                     this.ballMarker = gameManager.player.xPos
                     this.downCount += 1
-                    if (this.firstDownMarker >= 44) {
-                        this.firstDownMarker = 44
+                    if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
+                        this.firstDownMarker = gameManager.xPositions.length - 3
                         document.getElementById('downs-text').innerHTML = '3rd and Goal'
                     } else {
                         document.getElementById('downs-text').innerHTML = '3rd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
@@ -181,8 +220,8 @@ class DownsManager {
         this.ballMarker = gameManager.player.xPos
         this.firstDownMarker = this.ballMarker + 4
         this.downCount = 1
-        if (this.firstDownMarker >= 44) {
-            this.firstDownMarker = 44
+        if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
+            this.firstDownMarker = gameManager.xPositions.length - 3
             document.getElementById('downs-text').innerHTML = '1st and Goal'
         } else {
             document.getElementById('downs-text').innerHTML = '1st and 10'

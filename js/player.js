@@ -4,7 +4,7 @@ module.exports = class Player {
         this.yPos = Math.round(gameManager.yPositions.length / 2);
         this.playerForward = true;
         this.name = "Player";
-        this.spriteSource = "././assets/player.gif";
+        this.spriteSource = "././assets/donk.gif";
         this.playerScore = 0;
 
         this.render()
@@ -26,6 +26,9 @@ module.exports = class Player {
         document.getElementById('player-sprite').style.left = gameManager.xPositions[this.xPos] + "px";
         document.getElementById('player-sprite').style.bottom = gameManager.yPositions[this.yPos] + "px";
         document.getElementById('player-sprite').style.zIndex = 100 - this.yPos
+        // document.getElementById('field-container').style.backgroundPositionX = - gameManager.xPositions[this.xPos] + "px";
+
+        console.log("Donk- x:" + this.xPos + " y:" + this.yPos );
     }
 
     move(e) {
@@ -110,12 +113,11 @@ module.exports = class Player {
                 gameManager.player.playerForward = true;
                 document.getElementById('player-sprite').style.transform = "scale(1, 1)";
             }
-            if (gameManager.player.xPos <= 44) {
+            if (gameManager.player.xPos <= gameManager.xPositions.length - 3) {
                 // If spot clear (null)
                 if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos) == null) {
                     gameManager.player.xPos++;
-                    document.getElementById('player-sprite').style.left = gameManager.xPositions[gameManager.player.xPos] + "px";
-                    document.getElementById('player-sprite').style.zIndex = 100 - gameManager.player.yPos
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
                     // If touchdown
                     if (gameManager.player.xPos == gameManager.xPositions.length - 2) {
                         gameManager.isPaused = true;

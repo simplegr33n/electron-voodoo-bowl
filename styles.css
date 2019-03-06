@@ -75,9 +75,15 @@ body {
 #field-container {
   position: relative;
   flex: 100%;
-  height: 350px;
-  background-image: url("./assets/field.png");
+}
+#field-image {
+  background-image: url("./assets/field-long.png");
   background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 800px;
+  width: 10000px;
+
 }
 #start-button {
   z-index: 200;
@@ -95,8 +101,8 @@ body {
 #player-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 128px;
+  height: 128px;
 }
 .zombie-sprite {
   user-select: none;
