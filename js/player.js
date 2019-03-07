@@ -30,10 +30,10 @@ module.exports = class Player {
         document.getElementById('player-sprite').style.zIndex = 100 - this.yPos
 
         // Move field
-        if (this.xPos > 16 && this.xPos < 26) {
+        if (this.xPos > 16 && this.xPos < 21) {
             document.getElementById('field-container').style.left = -(gameManager.xPositions[15-this.xPos]) + "px";
-        } else if  (this.xPos >= 26 && this.xPos < 130) {
-            document.getElementById('field-container').style.left = -(gameManager.xPositions[this.xPos - 10]) + "px";
+        } else if  (this.xPos >= 21 && this.xPos < 130) {
+            document.getElementById('field-container').style.left = -(gameManager.xPositions[this.xPos - 5]) + "px";
         } else if (this.xPos >= 130) {
             document.getElementById('field-container').style.left = -(gameManager.xPositions[130 - this.xPos]) + "px";
         } else {
