@@ -184,9 +184,9 @@ class DownsManager {
                     this.downCount += 1
                     if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
                         this.firstDownMarker = gameManager.xPositions.length - 3
-                        document.getElementById('downs-text').innerHTML = '2nd and Goal'
+                        //document.getElementById('downs-text').innerHTML = '2nd and Goal'
                     } else {
-                        document.getElementById('downs-text').innerHTML = '2nd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
+                        //document.getElementById('downs-text').innerHTML = '2nd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
                     }
                     this.renderMarkers()
                     break
@@ -195,9 +195,9 @@ class DownsManager {
                     this.downCount += 1
                     if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
                         this.firstDownMarker = gameManager.xPositions.length - 3
-                        document.getElementById('downs-text').innerHTML = '3rd and Goal'
+                        //document.getElementById('downs-text').innerHTML = '3rd and Goal'
                     } else {
-                        document.getElementById('downs-text').innerHTML = '3rd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
+                        //document.getElementById('downs-text').innerHTML = '3rd and ' + (Math.round((this.firstDownMarker - this.ballMarker) * 2.5))
                     }
                     this.renderMarkers()
                     break
@@ -218,9 +218,9 @@ class DownsManager {
         this.downCount = 1
         if (this.firstDownMarker >= gameManager.xPositions.length - 3) {
             this.firstDownMarker = gameManager.xPositions.length - 3
-            document.getElementById('downs-text').innerHTML = '1st and Goal'
+            //document.getElementById('downs-text').innerHTML = '1st and Goal'
         } else {
-            document.getElementById('downs-text').innerHTML = '1st and 10'
+            //document.getElementById('downs-text').innerHTML = '1st and 10'
         }
         this.renderMarkers()
     }

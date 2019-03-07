@@ -20,62 +20,7 @@ body {
 /* UI */
 .row {
   display: flex;
-}
-#info-bar {
-  left: 12px;
-  top: 12px;
-  position: absolute;
-  display: flex;
-  height: 80px;
-  width: 400px;
-  justify-content: center;
-  align-content: center;
-  background-color:#b3a81ade;
-  z-index: 200;
-}
-.score-box {
-  text-align: center;
-  flex: 100%;
-}
-.downs-box {
-  text-align: center;
-  flex: 100%;
-}
-.time-box {
-  text-align: center;
-  flex: 100%;
-}
-.box-header {
-  user-select: none;
-  margin-top: 5px;
-  margin-bottom: 0px;
-  font-size: 28pt;
-  font-weight: 900;
-  font-family: "TrenchFont"
-}
-#score-text {
-  user-select: none;
-  margin-top: -5px;
-  font-size: 22pt;
-  font-weight: 900;
-  font-family: "TrenchFont";
-  color: rgb(26, 97, 91)
-}
-#downs-text {
-  user-select: none;
-  margin-top: -5px;
-  font-size: 22pt;
-  font-weight: 900;
-  font-family: "TrenchFont";
-  color: rgb(54, 48, 28)
-}
-#time-text {
-  user-select: none;
-  margin-top: -5px;
-  font-size: 22pt;
-  font-weight: 900;
-  font-family: "TrenchFont";
-  color: rgb(105, 49, 26)
+  flex-direction: row;
 }
 #field-container {
   position: relative;
@@ -133,4 +78,75 @@ body {
   position: absolute;
   width: 128px;
   height: 128px;
+}
+
+/* INFO BAR */
+#info-bar {
+  left: 12px;
+  top: 12px;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  height: 85px;
+  width: 260px;
+  align-content: center;
+  background-color:#160914e8;
+  z-index: 200;
+}
+.score-box {
+  display: flex;
+  text-align: center;
+  flex: 100%;
+}
+.time-box {
+  display: flex;
+  text-align: center;
+  flex: 100%;
+}
+#score-text {
+  user-select: none;
+  margin-top: -90px;
+  margin-left: 66px;
+  font-size: 32pt;
+  font-weight: 900;
+  font-family: "TrenchFont";
+  color: rgb(26, 97, 91)
+}
+#time-text {
+  user-select: none;
+  margin-top: -80px;
+  margin-left: 180px;
+  background-color: chartreuse;
+  padding: 8px;
+  font-size: 32pt;
+  font-weight: 900;
+  font-family: "TrenchFont";
+  color: rgb(105, 49, 26)
+}
+#donk-avatar {
+  background-image: url("./assets/donk.gif");
+  user-select: none;
+  position: relative;
+  background-size: cover;
+  top: 10px;
+  margin: 0;
+  padding: 0;
+  width: 64px;
+  height: 64px;
+}
+.banana-up {
+  background-image: url("./assets/banana.gif");
+  background-size: cover;
+  user-select: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  top: -20px;
+  left: 60px;
+  width: 32px;
+  height: 32px;
+}
+.banana-row {
+  display: flex;
+  flex-direction: row;
 }
