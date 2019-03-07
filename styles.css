@@ -81,7 +81,7 @@ body {
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  height: 800px;
+  height: 700px;
   width: 10000px;
 
 }
@@ -107,25 +107,25 @@ body {
 .zombie-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 128px;
+  height: 128px;
 }
 .referee-tombstone-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 128px;
+  height: 128px;
 }
 .referee-sprite {
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 128px;
+  height: 128px;
 }
 .marker-sprite {
   opacity: 0.85;
   user-select: none;
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 128px;
+  height: 128px;
 }

@@ -8,7 +8,7 @@ let Marker = require('./marker.js')
 module.exports = class GameManager {
     constructor() {
         this.fieldWidth = 10000;
-        this.fieldHeight = 800;
+        this.fieldHeight = 700;
         this.xPositions = [];
         this.yPositions = [];
         this.referees = [];
@@ -83,14 +83,11 @@ module.exports = class GameManager {
     }
 
     getXPositionArray() {
- 
         var yardInPixels = Math.round(this.fieldWidth / 150)
         var progress = 0;
         var next = Math.round(progress + yardInPixels);
-        console.log("ok.."+ progress + "->" + next + " fw: " + this.fieldWidth)
 
         var testArray = [0]
-
         for (next; next <= this.fieldWidth; next += yardInPixels) {
             testArray.push(next);
            
@@ -102,15 +99,12 @@ module.exports = class GameManager {
     }
 
     getYPositionArray() {
- 
         var stepInPixels = Math.round(this.fieldHeight / 13)
         var progress = 0;
         var next = Math.round(progress + stepInPixels);
-        console.log("ok.."+ progress + "->" + next + " fh: " + this.fieldHeight)
 
         var testArray = [0]
-
-        for (next; next <= this.fieldHeight; next += stepInPixels) {
+        for (next; Math.round(next + stepInPixels) <= this.fieldHeight; next += stepInPixels) {
             testArray.push(next);
            
         }
@@ -151,8 +145,10 @@ module.exports = class GameManager {
 
     setZombies() {
         for (var i = 0; i < 13; i++) {
-            gameManager.zombies.push(new Zombie("zomID_" + i, this.getRandX(this.player.xPos + 1), this.getRandY()))
+            console.log(this.player.xPos + 1 + " " + this.player.xPos + 25)
+            gameManager.zombies.push(new Zombie("zomID_" + i, this.getRandX(this.player.xPos + 1, this.player.xPos + 20), this.getRandY()))
         }
+        console.log(gameManager.zombies)
     }
 
     setReferees() {
@@ -163,8 +159,8 @@ module.exports = class GameManager {
     }
 
     // For generating entity locations (other than Player)
-    getRandX(minX = 0) {
-        return Math.floor((Math.random() * (this.xPositions.length - minX)) + minX);
+    getRandX(minX = 0, maxX = 0) {
+        return Math.floor((Math.random() * (this.xPositions.length - minX - (this.xPositions.length - maxX)) + minX));
     }
     getRandY() {
         return Math.floor((Math.random() * this.yPositions.length)); // 

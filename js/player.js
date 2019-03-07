@@ -23,12 +23,24 @@ module.exports = class Player {
     set(setX = 14, setY = Math.round(gameManager.yPositions.length / 2)) {
         this.xPos = setX;
         this.yPos = setY;
+
+        // Move player
         document.getElementById('player-sprite').style.left = gameManager.xPositions[this.xPos] + "px";
         document.getElementById('player-sprite').style.bottom = gameManager.yPositions[this.yPos] + "px";
         document.getElementById('player-sprite').style.zIndex = 100 - this.yPos
-        // document.getElementById('field-container').style.backgroundPositionX = - gameManager.xPositions[this.xPos] + "px";
 
-        console.log("Donk- x:" + this.xPos + " y:" + this.yPos );
+        // Move field
+        if (this.xPos > 16 && this.xPos < 26) {
+            document.getElementById('field-container').style.left = -(gameManager.xPositions[15-this.xPos]) + "px";
+        } else if  (this.xPos >= 26 && this.xPos < 130) {
+            document.getElementById('field-container').style.left = -(gameManager.xPositions[this.xPos - 10]) + "px";
+        } else if (this.xPos >= 130) {
+            document.getElementById('field-container').style.left = -(gameManager.xPositions[130 - this.xPos]) + "px";
+        } else {
+            document.getElementById('field-container').style.left = -(gameManager.xPositions[this.xPos]) + "px";
+        }
+
+        console.log("Donk- x:" + this.xPos + " y:" + this.yPos);
     }
 
     move(e) {
@@ -119,7 +131,7 @@ module.exports = class Player {
                     gameManager.player.xPos++;
                     gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
                     // If touchdown
-                    if (gameManager.player.xPos == gameManager.xPositions.length - 2) {
+                    if (gameManager.player.xPos == 130) {
                         gameManager.isPaused = true;
                         gameManager.player.playerScore += 7;
                         document.getElementById('score-text').innerHTML = gameManager.player.playerScore;
@@ -135,12 +147,12 @@ module.exports = class Player {
                     // If spot Zombie
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Zombie") {
                     gameManager.player.die()
-                
+
                     // If spot Referee
                 } else if (gameManager.player.checkSpot(gameManager.player.xPos + 1, gameManager.player.yPos).name === "Referee") {
                     gameManager.player.xPos++;
                     gameManager.player.checkSpot(gameManager.player.xPos, gameManager.player.yPos).die() // Kill ref
-                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)           
+                    gameManager.player.set(gameManager.player.xPos, gameManager.player.yPos)
                 }
             }
         }
