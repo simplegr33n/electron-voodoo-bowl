@@ -159,8 +159,13 @@ module.exports = class GameManager {
     }
 
     // For generating entity locations (other than Player)
-    getRandX(minX = 0, maxX = 0) {
-        return Math.floor((Math.random() * (this.xPositions.length - minX - (this.xPositions.length - maxX)) + minX));
+    getRandX(minX = null, maxX = null) {
+        if (minX == null && maxX == null) {
+            return Math.floor((Math.random() * (this.xPositions.length - 1)));
+        } else {
+            return Math.floor((Math.random() * (this.xPositions.length - minX - (this.xPositions.length - maxX)) + minX));
+        }
+        
     }
     getRandY() {
         return Math.floor((Math.random() * this.yPositions.length)); // 
