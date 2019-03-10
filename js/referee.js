@@ -4,7 +4,7 @@ module.exports = class Referee {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.name = "Referee";
-		this.sprite = "./assets/referee.png";
+		this.sprite = "./assets/referee.gif";
 
 		this.render()
 	}
